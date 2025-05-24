@@ -1,11 +1,11 @@
 # Web Application Vulnerability Scan Report
 
 **Tool Used:** OWASP ZAP  
-**Date of Scan:** [2025-05-20]  
-**Scanned By:** [Name/Team]  
-**Target Application:** [https://ihealth.iium.edu.my]  
-**Scan Type:** [Active / Passive]  
-**Scan Duration:** [Start Time – End Time]
+**Date of Scan:** 2025-05-22  
+**Scanned By:** The Jannah Seekers  
+**Target Application:** https://ihealth.iium.edu.my  
+**Scan Type:** Active  
+**Scan Duration:** 3.30PM – 3.40PM  
 
 ---
 
@@ -13,15 +13,15 @@
 
 | Metric                         | Value            |
 |-------------------------------|------------------|
-| Total Issues Identified       | [Total Count]    |
-| Critical Issues               | [Count]          |
-| High-Risk Issues              | [Count]          |
-| Medium-Risk Issues            | [Count]          |
-| Low-Risk/Informational Issues | [Count]          |
-| Remediation Status            | [Pending/In Progress/Complete] |
+| Total Issues Identified       | 13    |
+| Critical Issues               | 0     |
+| High-Risk Issues              | 0     |
+| Medium-Risk Issues            | 3     |
+| Low-Risk/Informational Issues | 10    |
+| Remediation Status            |Pending|
 
 **Key Takeaway:**  
-[Brief overview: e.g., "The scan identified 2 high-risk vulnerabilities that require immediate attention. No critical issues were found."]
+The scan identified 3 medium-risk vulnerabilities & 10 low/informational findings that require immediate attention. No critical issues were found.  
 
 ---
 
@@ -29,11 +29,21 @@
 
 | Risk Level | Number of Issues | Example Vulnerability          |
 |------------|------------------|--------------------------------|
-| Critical   | [Count]          | [e.g., Remote Code Execution]  |
-| High       | [Count]          | [e.g., SQL Injection]          |
-| Medium     | [Count]          | [e.g., Insecure Cookies]       |
-| Low        | [Count]          | [e.g., Missing HTTP Headers]   |
-| Info       | [Count]          | [e.g., Server Version Exposed] |
+| Critical   | 0                | -  |
+| High       | 0                | -  |
+| Medium     | 3                | Absence of Anti-CSRF Tokens |
+|            |                  | Content Security Policy (CSP) Header Not Set |
+|            |                  | Vulnerable JS Library |
+| Low        | 6                | Cookie No HttpOnly Flag |
+|            |                  | Cookie Without Secure Flag |
+|            |                  | Cookie without SameSite Attribute |
+|            |                  | Server Leaks Version Information via "Server" HTTP Response Header Field |
+|            |                  | Strict-Transport-Security Header Not Set |
+|            |                  | X-Content-Type-Options Header Missing |
+| Info       | 4                | Information Disclosure - Suspicious Comments |
+|            |                  | Modern Web Application |
+|            |                  | Session Management Response Identified |
+|            |                  | User Agent Fuzzer |
 
 ---
 
