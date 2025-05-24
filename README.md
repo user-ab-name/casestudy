@@ -62,7 +62,7 @@ The scan identified 3 medium-risk vulnerabilities & 10 low/informational finding
   Could lead to unauthorized actions such as changing passwords or making transactions.
 
 - **OWASP Reference:**  
-- [OWASP A01 - Broken Access Control](https://owasp.org/Top10/A01_2021-Broken_Access_Control)  
+  - [OWASP A01 - Broken Access Control](https://owasp.org/Top10/A01_2021-Broken_Access_Control)  
   
 - **Recommendation:**  
   Implement CSRF tokens for all state-changing requests.
