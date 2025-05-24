@@ -49,21 +49,20 @@ The scan identified 3 medium-risk vulnerabilities & 10 low/informational finding
 
 ## 3. Detailed Findings
 
-### [Vulnerability Title 1]
+### Content Security Policy (CSP) Header Not Set
 
-- **Severity:** [Critical / High / Medium / Low / Info]  
+- **Severity:** Medium 
 - **Description:**  
-  [Short explanation of the issue]
+  The server does not set a Content Security Policy (CSP) header. This increases the risk of XSS attacks.
 
 - **Affected URLs:**  
-  - [https://example.com/path1](#)
-  - [https://example.com/path2](#)
+  - https://ihealth.iium.edu.my(#)
 
 - **Business Impact:**  
-  [Explain potential consequence in non-technical terms.]
+  May allow attackers to inject malicious scripts, leading to session hijacking or data theft.
 
 - **OWASP Reference:**  
-  [https://owasp.org/www-project-top-ten/](#)
+  (https://owasp.org/Top10/A05_2021-Security_Misconfiguration/)(#)
 
 - **Recommendation:**  
   [Suggested fix, e.g., "Validate user inputs using allow-lists."]
