@@ -318,6 +318,87 @@ The scan identified 3 medium-risk vulnerabilities & 10 low/informational finding
 
 ---
 
+### 11. Modern Web Application (Fingerprinting)
+
+- **Severity:** Informational 
+- **Description:**  
+  The scanner identified characteristics typical of a modern web application. Often gathered through headers, response patterns, or observable behaviors.
+
+- **Affected URLs:**  
+  -  https://ihealth.iium.edu.my
+
+- **Business Impact:**  
+  May help attackers tailor their approach when attempting exploitation, especially if known vulnerabilities exist in the identified frameworks.
+
+- **OWASP Reference:**  
+  - [OWASP Info Gathering](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/01-Information_Gathering)
+
+- **Recommendation:**  
+  Minimize response headers or client behaviors that reveal underlying technologies unless absolutely necessary.
+
+- **Prevention Strategy:**  
+  - Disable framework-specific headers.
+  - Obfuscate URLs and API endpoints where practical.
+  - Keep frameworks and dependencies up to date.
+
+> **Responsible Team:** DevOps Team    
+> **Target Remediation Date:** 2025-06-15
+
+---
+
+### 12. Session Management Response Identified
+
+- **Severity:** Informational 
+- **Description:**  
+  The scan identified session-related responses such as session ID cookies or authentication tokens being issued. This indicates that session management is in place and potentially targetable.
+
+- **Affected URLs:**  
+  - https://ihealth.iium.edu.my/public/js/plugins/jquery/jquery.min.js)
+
+- **Business Impact:**  
+  This information could aid attackers in crafting session fixation or hijacking attacks if additional weaknesses exist.
+
+- **OWASP Reference:**  
+  - [OWASP Session Management Testing](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/06-Session_Management_Testing/)
+
+- **Recommendation:**  
+  Ensure strong session management policies and headers (e.g., HttpOnly, Secure, SameSite) are consistently applied.
+
+- **Prevention Strategy:**  
+  - Use secure cookie attributes.
+  - Rotate session IDs after login.
+  - Set appropriate session timeouts and controls.
+
+> **Responsible Team:** Backend Team    
+> **Target Remediation Date:** 2025-06-15
+
+---
+### 13. User Agent Fuzzer
+
+- **Severity:** Informational 
+- **Description:**  
+  The scanner used a variety of User-Agent headers to probe for differences in response behavior. The application responded consistently, but this check is noted as part of reconnaissance.
+
+- **Affected URLs:**  
+  -  (https://ihealth.iium.edu.my)
+
+- **Business Impact:**  
+  No direct vulnerability, but response differences could in some cases reveal business logic or security flaws.
+
+- **OWASP Reference:**  
+  - [OWASP Info Gathering](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/01-Information_Gathering)
+
+- **Recommendation:**  
+  Validate consistent behavior across varied user agents and implement default response handling.
+
+- **Prevention Strategy:**  
+  - Normalize and sanitize user input headers.
+  - Log and alert unusual user agent patterns.
+
+> **Responsible Team:** DevOps Team    
+> **Target Remediation Date:** 2025-06-15
+---
+
 ## Recommendations & Next Steps
 - Address all Medium risk issues within two weeks.
 - Upgrade any outdated frontend libraries (e.g., Bootstrap).
@@ -337,6 +418,6 @@ The scan identified 3 medium-risk vulnerabilities & 10 low/informational finding
 ---
 
 **Prepared by:**  
-Nur Atiqah Batrisyia   
-atiqah.batrisyia@live.iium.edu.my 
+Nur Atiqah Batrisyia  
+atiqah.batrisyia@live.iium.edu.my  
 25-5-2025
