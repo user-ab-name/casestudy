@@ -5,7 +5,7 @@
 **Scanned By:** The Jannah Seekers  
 **Target Application:** [https://xcess.iium.edu.my](https://xcess.iium.edu.my)  
 **Scan Type:** Active  
-**Scan Duration:** 12.00 – 12.09AM  
+**Scan Duration:** 12.00AM – 12.09AM  
 
 ---
 
@@ -184,7 +184,7 @@ The scan identified 1 high-risk vulnerability (Medium confidence) and 4 medium-r
   
 ---
 
-Prepared by:
-Nur Fatihah Adawiyah binti Rusdi
-fatihahadawiyah@gmail.com
+**Prepared by:**  
+Nur Fatihah Adawiyah binti Rusdi 
+fatihahadawiyah@gmail.com  
 28-5-2025
