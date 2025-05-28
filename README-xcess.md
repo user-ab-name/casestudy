@@ -185,6 +185,6 @@ The scan identified 1 high-risk vulnerability (Medium confidence) and 4 medium-r
 ---
 
 **Prepared by:**  
-Nur Fatihah Adawiyah binti Rusdi 
-fatihahadawiyah@gmail.com  
+Nur Fatihah Adawiyah binti Rusdi  
+fatihahadawiyah@gmail.com   
 28-5-2025
