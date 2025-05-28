@@ -34,16 +34,6 @@ The scan identified 3 medium-risk vulnerabilities & 10 low/informational finding
 | Medium     | 3                | Absence of Anti-CSRF Tokens |
 |            |                  | Content Security Policy (CSP) Header Not Set |
 |            |                  | Vulnerable JS Library |
-| Low        | 6                | Cookie No HttpOnly Flag |
-|            |                  | Cookie Without Secure Flag |
-|            |                  | Cookie without SameSite Attribute |
-|            |                  | Server Leaks Version Information via "Server" HTTP Response Header Field |
-|            |                  | Strict-Transport-Security Header Not Set |
-|            |                  | X-Content-Type-Options Header Missing |
-| Info       | 4                | Information Disclosure - Suspicious Comments |
-|            |                  | Modern Web Application |
-|            |                  | Session Management Response Identified |
-|            |                  | User Agent Fuzzer |
 
 ---
 
