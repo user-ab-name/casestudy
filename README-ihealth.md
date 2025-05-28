@@ -41,22 +41,14 @@ The scan identified 3 medium-risk vulnerabilities that require immediate attenti
 
 ### 1. Absence of Anti-CSRF Tokens
 
-- **Severity:** Medium 
-- **Description:**  
-  No CSRF tokens were detected in forms or headers. This could allow attackers to perform actions on behalf of an authenticated user.
-
+- **Severity:** Medium  
+- **Description:** No CSRF tokens were detected in forms or headers. This could allow attackers to perform actions on behalf of an authenticated user.  
 - **Affected URLs:**  
-  - https://ihealth.iium.edu.my
-
-- **Business Impact:**  
-  Could lead to unauthorized actions such as changing passwords or making transactions.
-
+  - https://ihealth.iium.edu.my  
+- **Business Impact:** Could lead to unauthorized actions such as changing passwords or making transactions.  
 - **OWASP Reference:**  
   - [OWASP A01 - Broken Access Control](https://owasp.org/Top10/A01_2021-Broken_Access_Control)  
-  
-- **Recommendation:**  
-  Implement CSRF tokens for all state-changing requests.
-
+- **Recommendation:** Implement CSRF tokens for all state-changing requests.  
 - **Prevention Strategy:**  
   - Use frameworks with built-in CSRF protection
   - Validate tokens server-side
@@ -69,21 +61,13 @@ The scan identified 3 medium-risk vulnerabilities that require immediate attenti
 ### 2. Content Security Policy (CSP) Header Not Set
 
 - **Severity:** Medium 
-- **Description:**  
-  No CSP header is set to restrict where resources can be loaded from.
-
+- **Description:** No CSP header is set to restrict where resources can be loaded from.  
 - **Affected URLs:**  
-  -  https://ihealth.iium.edu.my
-
-- **Business Impact:**  
-  Increases risk of XSS and data injection attacks.
-
+  -  https://ihealth.iium.edu.my  
+- **Business Impact:** Increases risk of XSS and data injection attacks.  
 - **OWASP Reference:**  
-  - [OWASP A05 - Security Misconfiguration](https://owasp.org/Top10/A05_2021-Security_Misconfiguration/)
-
-- **Recommendation:**  
-  Set a strict CSP header to control allowed sources.
-
+  - [OWASP A05 - Security Misconfiguration](https://owasp.org/Top10/A05_2021-Security_Misconfiguration/)  
+- **Recommendation:** Set a strict CSP header to control allowed sources.  
 - **Prevention Strategy:**  
   - Define a strong CSP
   - Regularly audit headers and script sources
@@ -96,21 +80,13 @@ The scan identified 3 medium-risk vulnerabilities that require immediate attenti
 ### 3. Vulnerable JS Library (Bootstrap v3.3.0)
 
 - **Severity:** Medium 
-- **Description:**  
-  The version in use has known vulnerabilities (e.g., CVE-2018-14041, CVE-2019-8331).
-
+- **Description:** The version in use has known vulnerabilities (e.g., CVE-2018-14041, CVE-2019-8331).  
 - **Affected URLs:**  
-  -  /public/js/plugins/bootstrap/bootstrap.min.js
-
-- **Business Impact:**  
-  May lead to XSS or client-side logic bypass.
-
+  -  /public/js/plugins/bootstrap/bootstrap.min.js  
+- **Business Impact:** May lead to XSS or client-side logic bypass.  
 - **OWASP Reference:**  
-  - [OWASP A06 - Using Vulnerable Components](https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/)
-
-- **Recommendation:**  
-  Upgrade to the latest Bootstrap version.
-
+  - [OWASP A06 - Using Vulnerable Components](https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/)  
+- **Recommendation:** Upgrade to the latest Bootstrap version.  
 - **Prevention Strategy:**  
   - Monitor NVD (National Vulnerability Database)
   - Use dependency management tools
@@ -129,7 +105,7 @@ The scan identified 3 medium-risk vulnerabilities that require immediate attenti
 
 ---
 
-## Appendix (Optional)
+## Appendix
 - Scan configuration: All risk and confidence levels included.
 - Total scanned site: https://ihealth.iium.edu.my
 - Tool Version: OWASP ZAP 2.16.1
