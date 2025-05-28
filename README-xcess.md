@@ -26,10 +26,13 @@ The scan identified 1 high-risk vulnerability (Medium confidence) and 4 medium-r
 
 ## 2. Summary of Findings
 
-| Risk Level | Number of Issues | Example Vulnerability                                                                                               |
-| ---------- | ---------------- | ------------------------------------------------------------------------------------------------------------------- |
-| High       | 1                | Vulnerable JS Library                                                                                               |
-| Medium     | 4                | CSP Header Not Set, Cross-Domain Misconfiguration, Vulnerable JS Library (Medium), Missing Anti-clickjacking Header |
+| Risk Level | Number of Issues | Example Vulnerability               |
+| ---------- | ---------------- | ----------------------------------- |
+| High       | 1                | Vulnerable JS Library               |
+| Medium     | 4                | CSP Header Not Set                  |
+|            |                  | Cross-Domain Misconfigurationt      | 
+|            |                  | Vulnerable JS Library               |  
+|            |                  | Missing Anti-clickjacking Header    |
 
 ---
 
@@ -56,7 +59,7 @@ The scan identified 1 high-risk vulnerability (Medium confidence) and 4 medium-r
   * Automate dependency checks.
   * Update third-party libraries regularly. 
 
-> **Responsible Team:** DevOps / Web Development Team
+> **Responsible Team:** DevOps / Web Development Team  
 > **Target Remediation Date:** in 1 week
 
 ---
@@ -79,7 +82,7 @@ The scan identified 1 high-risk vulnerability (Medium confidence) and 4 medium-r
   * Apply and test CSP in staging; Ensure that web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.
   * Avoid use of `unsafe-inline` and `unsafe-eval`.
 
-> **Responsible Team:** DevOps / Web Team
+> **Responsible Team:** DevOps / Web Team  
 > **Target Remediation Date:** in 1-2 weeks
 
 ---
@@ -104,7 +107,7 @@ The scan identified 1 high-risk vulnerability (Medium confidence) and 4 medium-r
   * Avoid wildcard domains.
   * Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).
 
-> **Responsible Team:** Web Security Team
+> **Responsible Team:** Web Security Team  
 > **Target Remediation Date:** in 1-2 weeks
 
 ---
@@ -126,7 +129,7 @@ The scan identified 1 high-risk vulnerability (Medium confidence) and 4 medium-r
 * **Prevention Strategy:**
   Conduct regular dependency audits.
 
-> **Responsible Team:** DevOps / Web Team
+> **Responsible Team:** DevOps / Web Team  
 > **Target Remediation Date:** in 1-2 weeks
 
 ---
@@ -137,7 +140,7 @@ The scan identified 1 high-risk vulnerability (Medium confidence) and 4 medium-r
 * **Description:**
   The `X-Frame-Options` or equivalent header is not set, allowing the site to be embedded in iframes (expose clickjacking risk).
 * **Affected URLs:**
-  * [https://xcess.iium.edu.my](https://xcess.iium.edu.my)]
+  * [https://xcess.iium.edu.my](https://xcess.iium.edu.my)
   * GET: [https://xcess.iium.edu.my/robots.txt](https://xcess.iium.edu.my/robots.txt)
 * **Business Impact:**
   Could allow attackers to trick users into clicking on hidden or disguised interface elements.
@@ -149,7 +152,7 @@ The scan identified 1 high-risk vulnerability (Medium confidence) and 4 medium-r
   * Implement security headers.
   * Test for framing vulnerabilities.
 
-> **Responsible Team:** DevOps / Security
+> **Responsible Team:** DevOps / Security  
 > **Target Remediation Date:** in 1-2 weeks
 
 ---
