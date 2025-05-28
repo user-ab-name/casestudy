@@ -5,7 +5,7 @@
 **Scanned By:** The Jannah Seekers
 **Target Application:** [https://xcess.iium.edu.my](https://xcess.iium.edu.my)
 **Scan Type:** Active
-**Scan Duration:** 12:00AM - 12:09AM
+**Scan Duration:** 12 - 12:09 AM
 
 ---
 
