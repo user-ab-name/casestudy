@@ -21,7 +21,7 @@
 | Remediation Status            |Pending|
 
 **Key Takeaway:**  
-The scan identified 3 medium-risk vulnerabilities & 10 low/informational findings that require immediate attention. No critical issues were found.  
+The scan identified 3 medium-risk vulnerabilities that require immediate attention. No critical issues were found.  
 
 ---
 
