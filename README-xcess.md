@@ -1,11 +1,11 @@
 # Web Application Vulnerability Scan Report
 
 **Tool Used:** OWASP ZAP  
-**Date of Scan:** 2025-05-22  
+**Date of Scan:** 2025-05-23  
 **Scanned By:** The Jannah Seekers  
-**Target Application:** https://ihealth.iium.edu.my  
+**Target Application:** [https://xcess.iium.edu.my](https://xcess.iium.edu.my)  
 **Scan Type:** Active  
-**Scan Duration:** 3.30PM – 3.40PM  
+**Scan Duration:** 12.00 – 12.09AM  
 
 ---
 
