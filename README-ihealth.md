@@ -13,7 +13,7 @@
 - [3. Detailed Findings](#3-detailed-findings)
   - [Absence of Anti-CSRF Tokens](#1-absence-of-anti-csrf-tokens)
   - [Content Security Policy](#2-content-security-policy-csp-header-not-set)
-  - [Vulnerable JS Library](#3-vulnerable-js-library)
+  - [Vulnerable JS Library](#3-vulnerable-js-library-bootstrap-v330)
 - [4. Result of The Report](#4-result-of-the-report)
 - [5. Appendix](#5-appendix)
 ---
@@ -71,14 +71,14 @@ Fixing these issues is critical to:
     - In `routes/web.php`, CSRF is enforced automatically on POST, PUT, PATCH, DELETE.  
 
 2. **Include CSRF tokens in all HTML forms**
+    - This will insert a hidden `<input>` field with the token. 
     - In Blade templates, include:
 ```bash
 <form method="POST" action="/example">
     @csrf
     <!-- form fields -->
 </form>
-```
-    - This will insert a hidden `<input>` field with the token.  
+``` 
 
 3. **For AJAX requests (if any), set the CSRF token in headers**
     - In your main JS (example in `resources/js/app.js or public/js/custom.js`):
@@ -91,7 +91,8 @@ $.ajaxSetup({
 });
 ```
 
-    - Ensure you have in your `<head>` section of `layouts/app.blade.php`:
+
+  - Ensure you have in your `<head>` section of `layouts/app.blade.php`
 
 ```bash
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -168,17 +169,15 @@ protected $middleware = [
 /public/css/plugins/bootstrap/
 ```
 
-    - For example, download Bootstrap 5.3.x from [https://getbootstrap.com] and update these files.
+  - For example, download Bootstrap 5.3.x from [https://getbootstrap.com] and update these files.
 
 2. **Update all references in your Blade templates**
-    - In resources/views/layouts/app.blade.php or similar, change:
+    - In resources/views/layouts/app.blade.php or similar, change to point to the new version.
 
 ```bash
 <link rel="stylesheet" href="/public/css/plugins/bootstrap/bootstrap.min.css">
 <script src="/public/js/plugins/bootstrap/bootstrap.min.js"></script>
 ```
-
-    - to point to the new version.
 
 3. **Use dependency scanning tools**
     - Run `npm audit` (if using npm) or enable **GitHub Dependabot alerts** to automatically monitor outdated packages. 
