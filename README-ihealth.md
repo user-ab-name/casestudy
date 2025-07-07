@@ -41,17 +41,43 @@ The scan identified 3 medium-risk vulnerabilities that require immediate attenti
 
 ### 1. Absence of Anti-CSRF Tokens
 
-- **Severity:** Medium  
-- **Description:** No CSRF tokens were detected in forms or headers. This could allow attackers to perform actions on behalf of an authenticated user.  
-- **Affected URLs:**  
-  - https://ihealth.iium.edu.my  
-- **Business Impact:** Could lead to unauthorized actions such as changing passwords or making transactions.  
-- **OWASP Reference:**  
-  - [OWASP A01 - Broken Access Control](https://owasp.org/Top10/A01_2021-Broken_Access_Control)  
-- **Recommendation:** Implement CSRF tokens for all state-changing requests.  
-- **Prevention Strategy:**  
-  - Use frameworks with built-in CSRF protection
-  - Validate tokens server-side
+- **Severity:** Medium   
+- **Description:** No CSRF tokens were detected in forms or headers. This leaves the application vulnerable to Cross-Site Request Forgery (CSRF) attacks, where attackers could perform unauthorized actions on behalf of authenticated users.   
+- **Affected URLs:** https://ihealth.iium.edu.my   
+- **Business Impact:** Could lead to unauthorized actions, such as modifying user profiles, changing passwords, or initiating transactions without user consent.  
+- **OWASP Reference:** [OWASP A01 - Broken Access Control](https://owasp.org/Top10/A01_2021-Broken_Access_Control)  
+
+**Recommendation and Prevention Strategy:** 
+1. **Implement CSRF protection in the backend framework**
+  - If using Laravel, ensure the `VerifyCsrfToken` middleware is enabled (default is on).
+    - File to check:
+```bash app/Http/Middleware/VerifyCsrfToken.php ```
+    - Ensure routes are not unnecessarily excluded in the `$except` array.
+  - In `routes/web.php`, CSRF is enforced automatically on POST, PUT, PATCH, DELETE.  
+
+2. **Include CSRF tokens in all HTML forms**
+  - In Blade templates, include:
+```bash <form method="POST" action="/example">
+    @csrf
+    <!-- form fields -->
+</form>```
+  - This will insert a hidden <input> field with the token.
+
+3. **For AJAX requests (if any), set the CSRF token in headers**
+  - In your main JS (example in resources/js/app.js or public/js/custom.js):
+
+javascript
+Copy code
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+Ensure you have in your <head> section of layouts/app.blade.php:
+
+html
+Copy code
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 > **Responsible Team:** Backend    
 > **Target Remediation Date:** 2025-06-15  
