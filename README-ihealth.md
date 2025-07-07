@@ -8,6 +8,15 @@
 **Scan Duration:** 3.30PM – 3.40PM  
 
 ---
+- [1. Executive Summary](#1-executive-summary)
+- [2. Summary of Findings](#2-summary-of-findings)
+- [3. Detailed Findings](#3-detailed-findings)
+  - [Absence of Anti-CSRF Tokens](#1-absence-of-anti-csrf-tokens)
+  - [Content Security Policy](#2-content-security-policy-csp-header-not-set)
+  - [Vulnerable JS Library](#3-vulnerable-js-library)
+- [4. Result of The Report](#4-result-of-the-report)
+- [5. Appendix](#5-appendix)
+---
 
 ## 1. Executive Summary
 
@@ -27,13 +36,19 @@ The scan identified 3 medium-risk vulnerabilities that require immediate attenti
 
 ## 2. Summary of Findings
 
-| Risk Level | Number of Issues | Example Vulnerability          |
-|------------|------------------|--------------------------------|
-| Critical   | 0                | -  |
-| High       | 0                | -  |
-| Medium     | 3                | Absence of Anti-CSRF Tokens |
-|            |                  | Content Security Policy (CSP) Header Not Set |
-|            |                  | Vulnerable JS Library |
+| Risk Level | Number of Issues | Example Vulnerability          | Why It Needs to Be Solved         |
+|------------|------------------|--------------------------------|-----------------------------------|
+| Critical   | 0                | -  | -  |
+| High       | 0                | -  | -  |
+| Medium     | 3                | Absence of Anti-CSRF Tokens | **CSRF tokens missing:** Could let attackers perform unauthorized actions by tricking logged-in users into submitting malicious requests (e.g., change password, make a booking)  |
+|            |                  | Content Security Policy (CSP) Header Not Set | **CSP header missing:** Increases the risk of Cross-Site Scripting (XSS) because browsers have no restrictions on where scripts/styles load from. |
+|            |                  | Vulnerable JS Library | Outdated Bootstrap has known security flaws that attackers can exploit to bypass client-side checks or inject malicious scripts.  |
+
+### Why It Matters
+Fixing these issues is critical to:
+- Protect user data and actions, ensuring attackers can’t hijack sessions or perform unauthorized transactions.
+- Prevent malicious script injections that could steal data or manipulate the page (XSS).
+- Avoid known exploits in outdated third-party libraries that put the entire system at risk.
 
 ---
 
@@ -51,7 +66,7 @@ The scan identified 3 medium-risk vulnerabilities that require immediate attenti
 1. **Implement CSRF protection in the backend framework**
   - If using Laravel, ensure the `VerifyCsrfToken` middleware is enabled (default is on).
     - File to check:
-```bash app/Http/Middleware/VerifyCsrfToken.php ```
+`app/Http/Middleware/VerifyCsrfToken.php`
     - Ensure routes are not unnecessarily excluded in the `$except` array.
   - In `routes/web.php`, CSRF is enforced automatically on POST, PUT, PATCH, DELETE.  
 
@@ -172,17 +187,18 @@ protected $middleware = [
 > **Target Remediation Date:** 2025-06-15 
 ---
 
-## Recommendations & Next Steps
-- Address all Medium risk issues within two weeks.
-- Upgrade any outdated frontend libraries (e.g., Bootstrap).
-- Enforce secure headers and cookies (e.g., HttpOnly, Secure, SameSite).
-- Re-scan the application post-remediation.
-- Adopt secure development lifecycle practices.
-- Schedule monthly vulnerability assessments.
+## 4. Result of The Report
+- No critical or high-risk vulnerabilities were found, indicating the system does not have immediate severe security flaws such as remote code execution or direct unauthorized data access.
+- However, three medium-level issues were identified, which could still be exploited by attackers to perform unauthorized actions, inject malicious scripts, or take advantage of known third-party library vulnerabilities.
+- Need to implement CSRF protection by using framework-native CSRF middleware and tokens in all forms and AJAX requests. Validate these tokens server-side.
+- Need to define and apply a strict Content-Security-Policy HTTP header to control which sources scripts, styles, and other resources can load from. Regularly audit these policies.
+- Need to upgrade to the latest stable version of Bootstrap (or any vulnerable third-party library) and monitor dependencies using tools like npm audit or GitHub Dependabot.
+- After implementing fixes, perform a follow-up OWASP ZAP scan to confirm that the vulnerabilities have been resolved.
+- Plan for monthly automated vulnerability scans and quarterly manual code reviews to proactively catch future issues.
 
 ---
 
-## Appendix
+## 5. Appendix
 - Scan configuration: All risk and confidence levels included.
 - Total scanned site: https://ihealth.iium.edu.my
 - Tool Version: OWASP ZAP 2.16.1
