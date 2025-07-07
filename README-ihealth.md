@@ -71,17 +71,17 @@ Fixing these issues is critical to:
   - In `routes/web.php`, CSRF is enforced automatically on POST, PUT, PATCH, DELETE.  
 
 2. **Include CSRF tokens in all HTML forms**
-  - In Blade templates, include:
+    - In Blade templates, include:
 ```bash
 <form method="POST" action="/example">
     @csrf
     <!-- form fields -->
 </form>
 ```
-  - This will insert a hidden `<input>` field with the token.  
+    - This will insert a hidden `<input>` field with the token.  
 
 3. **For AJAX requests (if any), set the CSRF token in headers**
-  - In your main JS (example in `resources/js/app.js or public/js/custom.js`):
+    - In your main JS (example in `resources/js/app.js or public/js/custom.js`):
 
 ```bash
 $.ajaxSetup({
@@ -91,7 +91,7 @@ $.ajaxSetup({
 });
 ```
 
-  - Ensure you have in your `<head>` section of `layouts/app.blade.php`:
+    - Ensure you have in your `<head>` section of `layouts/app.blade.php`:
 
 ```bash
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -114,7 +114,7 @@ $.ajaxSetup({
 
 **Recommendation and Prevention Strategy:** 
 1. **Add CSP header globally in the HTTP response**
-  - In Laravel, this can be done by creating a middleware. Example: `app/Http/Middleware/ContentSecurityPolicy.php`
+    - In Laravel, this can be done by creating a middleware. Example: `app/Http/Middleware/ContentSecurityPolicy.php`
 
 ```bash
 namespace App\Http\Middleware;
@@ -161,27 +161,27 @@ protected $middleware = [
 
 **Recommendation and Prevention Strategy:** 
 1. **Upgrade Bootstrap to the latest stable version**
-  - Replace old Bootstrap files in:
+    - Replace old Bootstrap files in:
 
 ```bash
 /public/js/plugins/bootstrap/
 /public/css/plugins/bootstrap/
 ```
 
-  - For example, download Bootstrap 5.3.x from [https://getbootstrap.com] and update these files.
+    - For example, download Bootstrap 5.3.x from [https://getbootstrap.com] and update these files.
 
 2. **Update all references in your Blade templates**
-  - In resources/views/layouts/app.blade.php or similar, change:
+    - In resources/views/layouts/app.blade.php or similar, change:
 
 ```bash
 <link rel="stylesheet" href="/public/css/plugins/bootstrap/bootstrap.min.css">
 <script src="/public/js/plugins/bootstrap/bootstrap.min.js"></script>
 ```
 
-  - to point to the new version.
+    - to point to the new version.
 
 3. **Use dependency scanning tools**
-  - Run `npm audit` (if using npm) or enable **GitHub Dependabot alerts** to automatically monitor outdated packages. 
+    - Run `npm audit` (if using npm) or enable **GitHub Dependabot alerts** to automatically monitor outdated packages. 
 
 > **Responsible Team:** Frontend Team    
 > **Target Remediation Date:** 2025-06-15 
