@@ -64,11 +64,11 @@ Fixing these issues is critical to:
 
 **Recommendation and Prevention Strategy:** 
 1. **Implement CSRF protection in the backend framework**
-  - If using Laravel, ensure the `VerifyCsrfToken` middleware is enabled (default is on).
-    - File to check:
+    - If using Laravel, ensure the `VerifyCsrfToken` middleware is enabled (default is on).
+      - File to check:
 `app/Http/Middleware/VerifyCsrfToken.php`
-    - Ensure routes are not unnecessarily excluded in the `$except` array.
-  - In `routes/web.php`, CSRF is enforced automatically on POST, PUT, PATCH, DELETE.  
+      - Ensure routes are not unnecessarily excluded in the `$except` array.
+    - In `routes/web.php`, CSRF is enforced automatically on POST, PUT, PATCH, DELETE.  
 
 2. **Include CSRF tokens in all HTML forms**
     - In Blade templates, include:
