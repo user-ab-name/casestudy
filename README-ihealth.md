@@ -57,27 +57,30 @@ The scan identified 3 medium-risk vulnerabilities that require immediate attenti
 
 2. **Include CSRF tokens in all HTML forms**
   - In Blade templates, include:
-```bash <form method="POST" action="/example">
+```bash
+<form method="POST" action="/example">
     @csrf
     <!-- form fields -->
-</form>```
-  - This will insert a hidden <input> field with the token.
+</form>
+```
+  - This will insert a hidden `<input>` field with the token.  
 
 3. **For AJAX requests (if any), set the CSRF token in headers**
-  - In your main JS (example in resources/js/app.js or public/js/custom.js):
+  - In your main JS (example in `resources/js/app.js or public/js/custom.js`):
 
-javascript
-Copy code
+```bash
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
-Ensure you have in your <head> section of layouts/app.blade.php:
+```
 
-html
-Copy code
+  - Ensure you have in your `<head>` section of `layouts/app.blade.php`:
+
+```bash
 <meta name="csrf-token" content="{{ csrf_token() }}">
+```
 
 > **Responsible Team:** Backend    
 > **Target Remediation Date:** 2025-06-15  
@@ -87,18 +90,46 @@ Copy code
 ### 2. Content Security Policy (CSP) Header Not Set
 
 - **Severity:** Medium 
-- **Description:** No CSP header is set to restrict where resources can be loaded from.  
+- **Description:** The application does not set a Content-Security-Policy (CSP) header. Without this, browsers do not restrict where scripts, styles, images, and other resources can be loaded from, increasing the risk of Cross-Site Scripting (XSS).  
 - **Affected URLs:**  
   -  https://ihealth.iium.edu.my  
 - **Business Impact:** Increases risk of XSS and data injection attacks.  
 - **OWASP Reference:**  
   - [OWASP A05 - Security Misconfiguration](https://owasp.org/Top10/A05_2021-Security_Misconfiguration/)  
-- **Recommendation:** Set a strict CSP header to control allowed sources.  
-- **Prevention Strategy:**  
-  - Define a strong CSP
-  - Regularly audit headers and script sources
 
-> **Responsible Team:** DevOps Team    
+**Recommendation and Prevention Strategy:** 
+1. **Add CSP header globally in the HTTP response**
+  - In Laravel, this can be done by creating a middleware. Example: `app/Http/Middleware/ContentSecurityPolicy.php`
+
+```bash
+namespace App\Http\Middleware;
+
+use Closure;
+
+class ContentSecurityPolicy
+{
+    public function handle($request, Closure $next)
+    {
+        $response = $next($request);
+        $response->headers->set('Content-Security-Policy', 
+            "default-src 'self'; script-src 'self'; style-src 'self' fonts.googleapis.com; font-src fonts.gstatic.com;"
+        );
+        return $response;
+    }
+}
+```
+
+2. **Register the middleware in `app/Http/Kernel.php`**
+```bash
+protected $middleware = [
+    // existing middleware...
+    \App\Http\Middleware\ContentSecurityPolicy::class,
+];
+```
+
+3. **Regularly audit the policy**
+   - Ensure allowed external resources are minimal (for example, if using Google Fonts, explicitly include them as shown above).
+  
 > **Target Remediation Date:** 2025-06-15  
 
 ---
@@ -106,16 +137,36 @@ Copy code
 ### 3. Vulnerable JS Library (Bootstrap v3.3.0)
 
 - **Severity:** Medium 
-- **Description:** The version in use has known vulnerabilities (e.g., CVE-2018-14041, CVE-2019-8331).  
+- **Description:** The application uses an outdated version of Bootstrap `(v3.3.0)` which has known security vulnerabilities, including **CVE-2018-14041** and **CVE-2019-8331**. 
 - **Affected URLs:**  
-  -  /public/js/plugins/bootstrap/bootstrap.min.js  
-- **Business Impact:** May lead to XSS or client-side logic bypass.  
+  -  `/public/js/plugins/bootstrap/bootstrap.min.js`  
+- **Business Impact:** May allow attackers to exploit XSS or bypass client-side security logic.  
 - **OWASP Reference:**  
   - [OWASP A06 - Using Vulnerable Components](https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/)  
-- **Recommendation:** Upgrade to the latest Bootstrap version.  
-- **Prevention Strategy:**  
-  - Monitor NVD (National Vulnerability Database)
-  - Use dependency management tools
+
+**Recommendation and Prevention Strategy:** 
+1. **Upgrade Bootstrap to the latest stable version**
+  - Replace old Bootstrap files in:
+
+```bash
+/public/js/plugins/bootstrap/
+/public/css/plugins/bootstrap/
+```
+
+  - For example, download Bootstrap 5.3.x from [https://getbootstrap.com] and update these files.
+
+2. **Update all references in your Blade templates**
+  - In resources/views/layouts/app.blade.php or similar, change:
+
+```bash
+<link rel="stylesheet" href="/public/css/plugins/bootstrap/bootstrap.min.css">
+<script src="/public/js/plugins/bootstrap/bootstrap.min.js"></script>
+```
+
+  - to point to the new version.
+
+3. **Use dependency scanning tools**
+  - Run `npm audit` (if using npm) or enable **GitHub Dependabot alerts** to automatically monitor outdated packages. 
 
 > **Responsible Team:** Frontend Team    
 > **Target Remediation Date:** 2025-06-15 
