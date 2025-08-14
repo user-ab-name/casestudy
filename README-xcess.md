@@ -34,6 +34,17 @@ The scan identified 1 high-risk vulnerability (Medium confidence) and 4 medium-r
 |            |                  | Vulnerable JS Library               |  
 |            |                  | Missing Anti-clickjacking Header    |
 
+**Why These Findings are Important:**
+The vulnerabilities identified could allow attackers to exploit outdated components, inject malicious code, bypass security policies, or perform clickjacking attacks. If left unaddressed, these security gaps can:
+
+* Compromise sensitive user and system data.
+* Enable unauthorized access or manipulation of application resources.
+* Disrupt normal application functionality and availability.
+* Damage the organization’s reputation and erode user trust.
+
+**Why It’s Important to Address Them:**
+Prompt remediation reduces the window of opportunity for attackers to exploit these weaknesses. Addressing the vulnerabilities strengthens the overall security posture, ensures compliance with security standards, and safeguards both the organization’s assets and the privacy of its users.
+
 ---
 
 ## 3. Detailed Findings
@@ -59,8 +70,6 @@ The scan identified 1 high-risk vulnerability (Medium confidence) and 4 medium-r
   * Automate dependency checks.
   * Update third-party libraries regularly. 
 
-> **Responsible Team:** DevOps / Web Development Team  
-> **Target Remediation Date:** in 1 week
 
 ---
 
@@ -82,8 +91,6 @@ The scan identified 1 high-risk vulnerability (Medium confidence) and 4 medium-r
   * Apply and test CSP in staging; Ensure that web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.
   * Avoid use of `unsafe-inline` and `unsafe-eval`.
 
-> **Responsible Team:** DevOps / Web Team  
-> **Target Remediation Date:** in 1-2 weeks
 
 ---
 
@@ -107,8 +114,6 @@ The scan identified 1 high-risk vulnerability (Medium confidence) and 4 medium-r
   * Avoid wildcard domains.
   * Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).
 
-> **Responsible Team:** Web Security Team  
-> **Target Remediation Date:** in 1-2 weeks
 
 ---
 
@@ -129,8 +134,6 @@ The scan identified 1 high-risk vulnerability (Medium confidence) and 4 medium-r
 * **Prevention Strategy:**
   Conduct regular dependency audits.
 
-> **Responsible Team:** DevOps / Web Team  
-> **Target Remediation Date:** in 1-2 weeks
 
 ---
 
@@ -152,8 +155,6 @@ The scan identified 1 high-risk vulnerability (Medium confidence) and 4 medium-r
   * Implement security headers.
   * Test for framing vulnerabilities.
 
-> **Responsible Team:** DevOps / Security  
-> **Target Remediation Date:** in 1-2 weeks
 
 ---
 
@@ -161,6 +162,9 @@ The scan identified 1 high-risk vulnerability (Medium confidence) and 4 medium-r
 
 * Remediate **High** and **Medium** vulnerabilities immediately.
 * Re-test the application in a staging environment after fixes before going live.
+* Conduct a **follow-up vulnerability scan (rescan)** using OWASP ZAP after all fixes have been applied to confirm that issues are resolved.
+* Compare results with the initial scan to verify that previously detected issues no longer appear.
+* Document any remaining or newly discovered vulnerabilities and address them promptly.
 * Schedule regular vulnerability scans.
 * Regularly review and update third-party libraries and dependencies.
 * Ensure all security headers are set according to best practices.
