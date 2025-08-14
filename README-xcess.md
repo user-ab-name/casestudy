@@ -63,6 +63,15 @@ Prompt remediation reduces the window of opportunity for attackers to exploit th
   [OWASP A06:2021 - Vulnerable and Outdated Components](https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/)
 * **Recommendation:**
   Update to the latest secure version of all third-party libraries especially the affected library (DataTables).
+* **How to Fix:**
+  * Pure PHP: Replace old CDN references with links to the latest version from the official provider.
+  Example:
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  * Laravel: If DataTables is used via npm/yarn:
+  npm install datatables.net@latest
+  npm run build
+    * If used via CDN, update Blade templates (.blade.php) to point to the latest secure version.
+    * Use npm audit regularly to check for vulnerabilities.
 * **Prevention Strategy:**
   * Regularly monitor for vulnerable libraries in dependencies.
   * Use trusted sources for updates.
@@ -87,6 +96,24 @@ Prompt remediation reduces the window of opportunity for attackers to exploit th
   [OWASP A07:2021 - Identification and Authentication Failures](https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/)
 * **Recommendation:**
   Implement a strong CSP header to restrict resource loading and script execution.
+* **How to Fix (PHP & Laravel):**
+  * Pure PHP:
+    header("Content-Security-Policy: default-src 'self'; script-src 'self' https://trusted.cdn.com; object-src 'none'");
+    Place it at the top of PHP scripts or in Apache/Nginx configuration.
+  * Laravel: Create middleware:
+    namespace App\Http\Middleware;
+    use Closure;
+    
+    class ContentSecurityPolicy
+    {
+        public function handle($request, Closure $next)
+        {
+            $response = $next($request);
+            $response->headers->set('Content-Security-Policy', "default-src 'self'; script-src 'self' https://trusted.cdn.com; object-src 'none'");
+            return $response;
+        }
+    }
+   * Register middleware in app/Http/Kernel.php.
 * **Prevention Strategy:**
   * Apply and test CSP in staging; Ensure that web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.
   * Avoid use of `unsafe-inline` and `unsafe-eval`.
@@ -113,7 +140,19 @@ Prompt remediation reduces the window of opportunity for attackers to exploit th
   * Remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.
   * Avoid wildcard domains.
   * Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).
-
+* **How to Fix (PHP & Laravel):**
+  * Pure PHP:
+    header("Access-Control-Allow-Origin: https://trusteddomain.com");
+    header("Access-Control-Allow-Methods: GET, POST");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization");
+  * Laravel:
+    In config/cors.php, set:
+    'paths' => ['api/*'],
+    'allowed_origins' => ['https://trusteddomain.com'],
+    'allowed_methods' => ['GET', 'POST'],
+    'allowed_headers' => ['Content-Type', 'Authorization'],
+  * Clear config cache:
+    php artisan config:cache
 
 ---
 
@@ -131,6 +170,14 @@ Prompt remediation reduces the window of opportunity for attackers to exploit th
   [A06:2021 - Vulnerable and Outdated Components](https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/)
 * **Recommendation:**
   Update or remove vulnerable libraries.
+* **How to Fix (PHP & Laravel):**
+ * Pure PHP: Replace CDN link with the latest Bootstrap version:
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+ * Laravel:
+  If using npm:
+  npm install bootstrap@latest
+  npm run build
+  * If using CDN, update Blade templates with the latest secure version.
 * **Prevention Strategy:**
   Conduct regular dependency audits.
 
@@ -151,6 +198,25 @@ Prompt remediation reduces the window of opportunity for attackers to exploit th
   [OWASP A05:2021 - Security Misconfiguration](https://owasp.org/Top10/A05_2021-Security_Misconfiguration/)
 * **Recommendation:**
   Add `X-Frame-Options: DENY` or use CSP frame-ancestors. Ensure one of them is set on all web pages returned by the site.
+* **How to Fix (PHP & Laravel):**
+  * Pure PHP:
+  header('X-Frame-Options: DENY');
+  * Laravel:
+  Create middleware:
+  namespace App\Http\Middleware;
+  use Closure;
+  
+  class FrameOptions
+  {
+      public function handle($request, Closure $next)
+      {
+          $response = $next($request);
+          $response->headers->set('X-Frame-Options', 'DENY');
+          return $response;
+      }
+  }
+  * Register in app/Http/Kernel.php.
+  * Alternatively, set via web server config (Apache/Nginx).
 * **Prevention Strategy:**
   * Implement security headers.
   * Test for framing vulnerabilities.
